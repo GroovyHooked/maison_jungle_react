@@ -1,6 +1,13 @@
 import { plantList } from "../datas/plantList";
+import "../styles/ShoppingList.css";
 console.log(plantList);
+const cat = plantList.reduce(
+  (acc, plant) =>
+    acc.includes(plant.category) ? acc : acc.concat(plant.category),
+  []
+);
 
+console.log("cat => ", cat);
 const Categories = () => {
   let arr = [];
   plantList.reduce((curr, prev) => {
@@ -12,6 +19,7 @@ const Categories = () => {
     curr.category = prev.category;
     return arr;
   });
+
   return (
     <div className="categories">
       <p>Liste des catégories de plantes:</p>
@@ -28,9 +36,14 @@ function ShoppingList() {
   return (
     <>
       <Categories />
-      <ul>
-        {plantList.map((item, i) => {
-          return <li key={i}>{item.name}</li>;
+      <ul className="">
+        {plantList.map((item) => {
+          return (
+            <li className="lmj-plant-item" key={item.id}>
+              {item.name}
+              {item?.isSpecialOffer && <div className="lmj-sales">Soldes</div>}
+            </li>
+          );
         })}
       </ul>
     </>
