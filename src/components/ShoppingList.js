@@ -1,13 +1,14 @@
 import { plantList } from "../datas/plantList";
+
+import PlantItem from "./PlantItem";
 import "../styles/ShoppingList.css";
-console.log(plantList);
+
 const cat = plantList.reduce(
   (acc, plant) =>
     acc.includes(plant.category) ? acc : acc.concat(plant.category),
   []
 );
 
-console.log("cat => ", cat);
 const Categories = () => {
   let arr = [];
   plantList.reduce((curr, prev) => {
@@ -36,13 +37,25 @@ function ShoppingList() {
   return (
     <>
       <Categories />
-      <ul className="">
+      <ul className="products">
         {plantList.map((item) => {
           return (
-            <li className="lmj-plant-item" key={item.id}>
-              {item.name}
-              {item?.isSpecialOffer && <div className="lmj-sales">Soldes</div>}
-            </li>
+            <>
+              <li className="lmj-plant-item" key={item.id}>
+                {item?.isSpecialOffer && (
+                  <div className="lmj-sales" key={item.id}>
+                    Soldes
+                  </div>
+                )}
+                <PlantItem
+                  name={item.name}
+                  cover={item.cover}
+                  id={item.id}
+                  light={item.light}
+                  water={item.water}
+                />
+              </li>
+            </>
           );
         })}
       </ul>
