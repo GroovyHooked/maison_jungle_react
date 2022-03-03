@@ -12,8 +12,6 @@ const cat = plantList.reduce(
 const Categories = () => {
   let arr = [];
   plantList.reduce((curr, prev) => {
-    console.log("curr, prev", curr.category, prev.category);
-
     if (curr.category !== prev.category) {
       arr.push(prev.category);
     }
@@ -23,7 +21,6 @@ const Categories = () => {
 
   return (
     <div className="categories">
-      <p>Liste des catégories de plantes:</p>
       <ul>
         {arr.map((cat, i) => {
           return <li key={i}>{cat}</li>;
@@ -38,16 +35,17 @@ function ShoppingList() {
     <>
       <Categories />
       <ul className="products">
-        {plantList.map((item) => {
+        {plantList.map((item, i) => {
           return (
             <>
-              <li className="lmj-plant-item" key={item.id}>
+              <li className="lmj-plant-item" key={item.name}>
                 {item?.isSpecialOffer && (
                   <div className="lmj-sales" key={item.id}>
                     Soldes
                   </div>
                 )}
                 <PlantItem
+                  key={i}
                   name={item.name}
                   cover={item.cover}
                   id={item.id}
