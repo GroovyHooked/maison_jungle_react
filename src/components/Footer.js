@@ -4,14 +4,15 @@ import { useState, useEffect } from "react";
 function Footer() {
   const [inputValue, setInputValue] = useState("");
   console.log(inputValue);
-  const footer = document.querySelector("#footer");
+
   useEffect(() => {
+    const footer = document.querySelector("#footer");
     footer.addEventListener("blur", () => {
       !inputValue.includes("@")
         ? alert("Please enter a valid email address")
         : alert("Ok");
     });
-  }, []);
+  }, [inputValue]);
 
   return (
     <footer className="lmj-footer">
